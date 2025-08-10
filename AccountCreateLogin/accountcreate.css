@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+
+
+/* ------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Balthazar';
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+
+
+/* ------------------------------------- */
+/*--- Navigation bar --- */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#navbar.scrolled {
+  background-color: rgba(42, 42, 42, 0.6);
+}
+
+
+.logo {
+  width: 2.25rem;
+}
+
+.navigation-bar a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #632d2b;
+  padding: 0.5rem 1.25rem;
+  transition: background-color 0.3s;
+}
+
+.navigation-bar a:hover {
+  background-color: #ba3b3b;
+}
+
+.account-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* ------------------------------------- */
