@@ -124,7 +124,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: url('dragon.png') no-repeat center center;
+  background: url('../images/homepage/dragon.png') no-repeat center center;
   background-size: contain;
   opacity: 0.05;
   width: 100%;

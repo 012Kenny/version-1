@@ -19,7 +19,7 @@ body {
 /* ------------------------------------- */
 /*--- Navigation bar --- */
 #navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   padding: 1rem 2rem;
@@ -63,14 +63,11 @@ body {
 
 
 .background {
-  height: 100vh;
+  height: 55rem;
   background-image: url('../images/community/background.jpg');
   background-size: cover;
   background-position: center;
-  
-  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
   box-shadow: inset 0 0 0 125rem rgba(0, 0, 0, 0.5);
 }
 
@@ -86,7 +83,7 @@ body {
   font-size: 36px;
   letter-spacing: 3px;
   font-weight: 800;
-  margin: 26px 0 28px;
+  margin: 4rem 0 2.8rem;
 }
 
 .rooms {
@@ -104,7 +101,7 @@ body {
   color: white;
   background: #7f3e3e;
   display: flex;
-  padding: 18px 22px 18px 18px;
+  padding: 8px 22px 8px 18px;
   position: relative;
   box-shadow: 0 6px 18px rgba(0,0,0,0.35);
   transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
@@ -150,7 +147,7 @@ body {
 
 .footer-text {
   margin-top: 1rem;
-  font-size: 1.8re;
+  font-size: 1.5rem;
   letter-spacing: 3px;
   color: white;
 }
