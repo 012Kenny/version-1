@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+
+
+/* ------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Balthazar';
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+
+
+/* ------------------------------------- */
+/*--- Navigation bar --- */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#navbar.scrolled {
+  background-color: rgba(42, 42, 42, 0.6);
+}
+
+
+.logo {
+  width: 2.25rem;
+}
+
+.navigation-bar a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #632d2b;
+  padding: 0.5rem 1.25rem;
+  transition: background-color 0.3s;
+}
+
+.navigation-bar a:hover {
+  background-color: #ba3b3b;
+}
+
+.account-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* ------------------------------------- */
+
+
+
+/*--- Account Section --- */
+
+.culture-section {
+  height: 100vh;
+  background-image: url('../images/culture/background.avif');
+    background-size: cover;
+  background-position: center;
+  
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 125rem rgba(0, 0, 0, 0.5);
+}
+ 
+ .overlay {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.culture-section h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 4rem;
+  letter-spacing: 2px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 2rem;
+  margin: 1rem;
+  width: 15rem;
+  height: 20rem;
+  text-align: left;
+}
+
+.card p {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.learn-more {
+  color: #00c3ff;
+}
+
