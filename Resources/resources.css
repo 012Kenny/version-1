@@ -44,6 +44,11 @@ body::after {
   justify-content: center;
   justify-content: space-between;
   transition: background-color 0.3s ease;
+  z-index: 3;
+}
+
+#navbar.scrolled {
+  background-color: rgba(42, 42, 42, 0.6);
 }
 
 
