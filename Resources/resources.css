@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+
+
+/* ------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body{height: 100%}
+
+body{
+  font-family: 'Balthazar';
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background: url('../images/resources/background.avif') center/cover no-repeat;
+  z-index:-2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}
+
+
+/* ------------------------------------- */
+/*--- Navigation bar --- */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+}
+
+
+.logo {
+  width: 2.25rem;
+}
+
+.navigation-bar a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #632d2b;
+  padding: 0.5rem 1.25rem;
+  transition: background-color 0.3s;
+}
+
+.navigation-bar a:hover {
+  background-color: #ba3b3b;
+}
+
+.account-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* ------------------------------------- */
+
+
+
+/*--- resource Section --- */
+
+.resource-section {
+  min-height: 58vh;
+  display: flex;
+  
+  align-items: center;
+  padding-top: 4.75rem;
+  text-align: center;
+}
+
+.title {
+  font-size:clamp(2.4rem, 6vw, 3.8rem);
+  letter-spacing: 0.06rem;
+}
+
+.featured {
+  padding: 2rem 8% 6rem;
+}
+
+.featured-heading {
+  color: white;
+  letter-spacing: 0.22rem;
+  font-size: 1.25rem;
+  margin: 1rem 0 1.25rem;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  background: rgba(0,0,0,0.55);
+  isolation: isolate;
+  min-height: 18rem;
+}
+
+.card::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:var(--bg);
+  background-size: cover;
+  background-position: center;
+  filter: saturate(95%);
+  z-index: -2;
+}
+
+.card::after {
+  content:"";
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.35));
+  z-index: -1;
+}
+
+
+.card-small {
+  height: 22rem;
+}
+
+.card-wide {
+  height: 22rem;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.card-banner {
+  height: 17rem;
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+}
+
+.card-title {
+  color: white;
+  line-height: 1.2;
+  letter-spacing: 0.18rem;
+  font-size:clamp(1.05rem, 2.2vw, 1.35rem);
+  text-shadow: 0 3px 18px rgba(0,0,0,0.6);
+}
+
+.learn {
+  align-self: flex-start;
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color:var(#6FE3C2);
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.learn:hover {
+  opacity: 0.85;
+  border-color:var(#6FE3C2);
+}
+
+
+.card {
+  transition: transform 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 980px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .card-small, .card-wide {height: 20rem;}
+  .card-wide {grid-column: 1; grid-row: 2;}
+  .card-banner {grid-row:3;}
+}

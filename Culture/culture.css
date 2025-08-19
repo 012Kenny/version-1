@@ -91,6 +91,7 @@ body {
 .culture-section h1 {
   font-size: 3rem;
   color: white;
+  font-weight: lighter;
   margin-bottom: 4rem;
   letter-spacing: 2px;
 }
@@ -102,7 +103,7 @@ body {
 }
 
 .card {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.4);
   color: white;
   padding: 2rem;
   margin: 1rem;
