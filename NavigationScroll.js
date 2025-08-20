@@ -6,16 +6,18 @@ const thresholdData = parseFloat(scriptTag.getAttribute("data-threshold")) // th
 
 
 // ------ Scroll nav ------ //
-window.addEventListener('scroll', function () {
+/* window.addEventListener('scroll', function () {
 const navbar = document.getElementById('navbar');
-    if (window.scrollY > window.innerHeight * thresholdData) {
-        return
-    }
     if (window.scrollY > window.innerHeight * thresholdData) { // goes below a certain height, + lower - higher
     navbar.classList.add('scrolled');
     } else { // if scroll isn't higher than innerheight
     navbar.classList.remove('scrolled');
     }
+}); */
+
+
+window.addEventListener("scroll", () => {
+    navbar.classList.toggle("scrolled", window.scrollY > window.innerHeight * thresholdData)
 });
 
 
