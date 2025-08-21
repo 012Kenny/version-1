@@ -6,7 +6,7 @@
   "description": "server side account",
   "main": "account.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node account.js"
   },
   "repository": {
     "type": "git",
