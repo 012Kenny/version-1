@@ -56,25 +56,26 @@ app.get("/", (req, res) => {
 
     stmt.run(username, hashedPassword, function (err) {
         if (err) {
-          return res.send("Username already exists. <a href=',,/AccountCreateLogin/accountcreate.html'>Try again</a>");
+          return res.json({success: false, message: "Username already taken"});
         }
 
     req.session.userId = this.lastID;
     req.session.username = username;
-    res.redirect("/");
+    res.json({sucess:true});
   });
 });
 
 app.post("/login", (req, res) => {
     const {username, password} = req.body;
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
-        if (!user) return res.send(" Invalid username or password. <a href='../AccountCreateLogin/accountlogin.html'>Try again</a>");        
+        if (!user) return res.json({success: false, message: "Invalid username or password"}); 
         const validPass = bcrypt.compareSync(password, user.password);
-        if (!validPass) return res.send("Invalid username or password. <a href='../AccountCreateLogin/accountlogin.html'>Try again</a>");
+        if (!validPass) return res.json({success: false, message: "Invalid username or password"});
+
     
     req.session.userId = user.id;
     req.session.username = user.username;
-    res.redirect("/");
+    res.json({success: true});
     });
 });
 

@@ -124,3 +124,8 @@ button {
 .login-text a {
   color: #00bcd4;
 }
+
+.error {
+  color: rgb(255, 135, 135);
+  display: none;
+}
