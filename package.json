@@ -1,0 +1,22 @@
+
+
+{
+  "name": "desktop",
+  "version": "1.0.0",
+  "description": "server side account",
+  "main": ".js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/012Kenny/version-1.git"
+  },
+  "author": "Kenny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/012Kenny/version-1/issues"
+  },
+  "homepage": "https://github.com/012Kenny/version-1#readme",
+  "keywords": []
+}
