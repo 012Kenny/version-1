@@ -4,7 +4,7 @@
   "name": "desktop",
   "version": "1.0.0",
   "description": "server side account",
-  "main": ".js",
+  "main": "account.js",
   "scripts": {
     "start": "node server.js"
   },
