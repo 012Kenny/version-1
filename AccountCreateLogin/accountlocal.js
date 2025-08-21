@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
-  
+        
+        
+        
         const result = await res.json();
   
         if (result.success) {
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           errorBox.style.display = "block";
         }
       } catch (err) {
+        console.error("Client error:", err)
         errorBox.textContent = "Something went wrong. Please try again.";
         errorBox.style.display = "block";
       }

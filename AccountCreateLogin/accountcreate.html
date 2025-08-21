@@ -30,9 +30,9 @@
       <div class = 'form-container'>
         <h1>CREATE<br>ACCOUNT</h1>
         <form action ='/signup' method = "POST">
-          <input type ='text' placeholder ='USERNAME' required>
-          <input type = 'password' placeholder = 'PASSWORD' required>
-          <button type = 'submit'>SIGN UP</button>
+          <input type ='text' placeholder ='USERNAME' name = 'username' required>
+          <input type = 'password' placeholder = 'PASSWORD' name = 'password'  required>
+          <button type = 'submit' id = 'signupBtn'>SIGN UP</button>
           <p id="error-text" class="error">Error</p>
         </form>
         <p class = 'login-text'>Already have an account? <a href = 'accountlogin.html'>Login</a></p>
