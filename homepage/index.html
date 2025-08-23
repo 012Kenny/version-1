@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cantonese Diaspora</title>
   <link rel="stylesheet" href="index.css" />
+  
 </head>
 <body>
   <script src = '../NavigationScroll.js' data-threshold="0.2"></script>
@@ -18,18 +19,19 @@
       <a href="../Culture/culture.html">Culture</a>
       <a href="../Resources/resources.html">Resources</a>
     </nav>
-    <a href="../AccountCreateLogin/accountcreate.html">
+
+    <div class = 'account-container'>
+          <a href="../AccountCreateLogin/accountcreate.html">
         <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon" id = 'account-icon'>
     </a>
-    <div class = 'account-dropdown' id = 'account-dropdown'>
-      <div id = 'account-username'>
-        Guest
+      <div class = 'account-dropdown' id = 'account-dropdown'>
+        <div id = 'account-username'>Guest</div>
+
+        <button id = 'signup-btn'>Sign up</button>
+        <button id = 'login-btn'>Login</button>
+        <button id = 'logout-btn'>Log out</button>
+        <button id = 'language-btn'>Language: English</button>
       </div>
-      <button id = 'signup-btn'>Sign up</button>
-      <button id = 'login-btn'>Login</button>
-      <button id = 'logout-btn'>Log out</button>
-      <button id = 'language-btn'>Language: English</button>
-      
     </div>
   </header>
    <!---------------------------- ---------------------------- ---------------------------->
