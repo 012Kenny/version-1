@@ -9,7 +9,7 @@
 </head>
 <body>
   <script src = '../NavigationScroll.js' data-threshold="0.2"></script>
-
+  <script src = 'accountmenu.js'></script>
 
   <!---------------------------- Navigation Bar ---------------------------->
   <header id="navbar">
@@ -21,15 +21,13 @@
     </nav>
 
     <div class = 'account-container'>
-          <a href="../AccountCreateLogin/accountcreate.html">
-        <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon" id = 'account-icon'>
-    </a>
+      <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon" id = 'account-icon'>
       <div class = 'account-dropdown' id = 'account-dropdown'>
         <div id = 'account-username'>Guest</div>
 
         <button id = 'signup-btn'>Sign up</button>
         <button id = 'login-btn'>Login</button>
-        <button id = 'logout-btn'>Log out</button>
+        <button id = 'logout-btn' style="display:none;">Log out</button>
         <button id = 'language-btn'>Language: English</button>
       </div>
     </div>
