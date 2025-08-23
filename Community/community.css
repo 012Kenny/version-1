@@ -121,6 +121,7 @@ body {
   margin: 0 auto;
   text-align: center;
   padding: 40px 24px 80px;
+  display: none;
 }
 
 .page-title {
@@ -202,10 +203,43 @@ body {
   flex-direction: column;
   height: 60vh;
   padding: 1rem;
-  background: rgba(255,255,255,0.5);
+  background: rgba(136, 136, 136, 0.5);
   width: 70%;
   height: 60%;
   max-width: 60rem;
+}
+
+.chat-title {
+  font-weight: 100;
+  color: white;
+}
+
+#leave-chat {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-weight: 100;
+  font-size: 1.1rem;
+  background: #7f3e3e;
+  padding: 8px 22px 8px 18px;
+  border: none;
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+
+}
+
+.send-msg {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-weight: 100;
+  font-size: 1.1rem;
+  background: #7f3e3e;
+  border: none;
+  padding: 0.25rem;
+}
+
+#leave-chat:hover {
+  background: #8c4444;
 }
 
 .chat-header {
@@ -220,7 +254,7 @@ body {
   margin: 1rem 0;
   padding: 0.5rem;
   border: 1px solid #ccc;
-  background: rgba(255,255,255,0.5);;
+  background: rgb(58, 58, 58);;
 }
 
 .message {

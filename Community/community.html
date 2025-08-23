@@ -51,13 +51,16 @@
 
     <section class = 'actual-chatroom'>
       <div class = 'chat-header'>
-        <h2>Live Chatroom</h2>
+        <h2 class = 'chat-title'>Live Chatroom</h2>
         <button id = 'leave-chat'>Back</button>
       </div>
 
-      <div id = 'chat-messages'>
-        
-      </div>
+      <div id = 'chat-messages'></div>
+
+      <form id = 'chat-form'>
+        <input id = 'chat-input' autocomplete = 'off' placeholder = 'Type a message...'/>
+        <button type = 'submit' class = 'send-msg'>Send</button>
+      </form>
     </section>
   </main>
   <!---------------------------- ---------------------------- ---------------------------->
