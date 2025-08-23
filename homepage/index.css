@@ -28,7 +28,6 @@ body {
   justify-content: center;
   justify-content: space-between;
   z-index: 1000;
-  transition: background-color 0.3s ease;
 }
 
 #navbar.scrolled {
@@ -49,7 +48,8 @@ body {
   transition: background-color 0.3s;
 }
 
-.navigation-bar a:hover {
+.navigation-bar a:hover , .learn-btn:hover {
+  transition: background-color 0.3s ease;
   background-color: #ba3b3b;
 }
 
@@ -64,6 +64,10 @@ body {
 }
 
 /* ------------------------------------- */
+
+/* --- drop down menu --- */
+
+
 
 /*--- Top homepage part --- */
 .main-section {
@@ -94,16 +98,24 @@ body {
 .main-text p {
   margin-top: 1rem;
   font-size: 1rem;
+  margin-bottom: 1.25rem;
   letter-spacing: 1px;
 }
 
-.language-btn {
+.learn-btn {
   margin-top: 1rem;
   background-color: #632d2b;
-  color: white;
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+
+.learn-btn a {
+  text-decoration: none;
+  color: white;
 }
 
 
@@ -164,17 +176,6 @@ body {
   margin: 0.5rem 0;
   font-weight: bold;
 }
-
-.learn-more-btn {
-  background-color: #984743;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
 
 
 /* ------------------------------------- */

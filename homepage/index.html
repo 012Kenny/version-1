@@ -19,8 +19,18 @@
       <a href="../Resources/resources.html">Resources</a>
     </nav>
     <a href="../AccountCreateLogin/accountcreate.html">
-        <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon">
+        <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon" id = 'account-icon'>
     </a>
+    <div class = 'account-dropdown' id = 'account-dropdown'>
+      <div id = 'account-username'>
+        Guest
+      </div>
+      <button id = 'signup-btn'>Sign up</button>
+      <button id = 'login-btn'>Login</button>
+      <button id = 'logout-btn'>Log out</button>
+      <button id = 'language-btn'>Language: English</button>
+      
+    </div>
   </header>
    <!---------------------------- ---------------------------- ---------------------------->
 
@@ -29,7 +39,8 @@
     <div class="main-text">
       <h1>HELPING<br />CANTONESE<br />DIASPORA</h1>
       <p>Helping Cantonese diaspora all over the world<br />connect with their culture.</p>
-      <button class="language-btn">LANGUAGE | 语言</button>
+      
+      <a href = #resources class = 'learn-btn'>Learn more</a>
     </div>
   </section>
   <!---------------------------- ---------------------------- ---------------------------->
@@ -38,16 +49,16 @@
   <section class="about-section" id="community">
     <h2>ABOUT THIS WEBSITE</h2>
     <p>
-      Hello, user! This is a self developed website focused on helping Cantonese diaspora all around the world.
-      Cantonese diaspora is Cantonese heritage people born in different countries, such as New Zealand or Australia.
+      This is a self developed website focused on helping Cantonese diaspora all around the world.
+      Cantonese diaspora is Cantonese heritage people born in different countries.
+      <br>
+      This website includes:
     </p>
     <ul>
       <li>Festival and language information</li>
       <li>Learning resources</li>
       <li>Engagement with other users</li>
     </ul>
-    <p>If you're curious, press “Learn More” below.</p>
-    <button class="learn-more-btn">Learn more</button>
   </section>
   <!---------------------------- ---------------------------- ---------------------------->
 
@@ -61,6 +72,5 @@
     <footer>© 2025 COPYRIGHT</footer>
   </section>
   <!---------------------------- ---------------------------- ---------------------------->
-
 </body>
 </html>
