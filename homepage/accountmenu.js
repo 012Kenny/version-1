@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
   const accountIcon = document.getElementById("account-icon");
   const dropdown = document.getElementById("account-dropdown"); 
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       logoutBtn.style.display = "none";
     }
   } catch (err) {
-    console.error("Session fetch error:", err);
+    console.error(err);
   }
 
   // Button actions

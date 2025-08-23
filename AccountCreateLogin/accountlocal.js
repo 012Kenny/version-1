@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // whether form is login or sign up
     const action = form.getAttribute('action');
+    
 
     try {
         const res = await fetch(action, {

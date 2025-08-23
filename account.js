@@ -1,6 +1,4 @@
-console.log("test")
 const express = require("express");
-console.log("test 2")
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const sqlite3 = require("sqlite3").verbose();
@@ -8,7 +6,6 @@ const path = require("path");
 
 const app = express();
 const db = new sqlite3.Database("./users.db");
-const fs = require("fs");
 
 
 app.use(express.urlencoded({ extended: true}));
@@ -25,6 +22,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname)));
 
+
 db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,20 +32,21 @@ db.run(`
 `);
 
 // is this user logged in and whats their username
-/* app.get("/session", (req, res) => {
+app.get("/session", (req, res) => {
   if (req.session.userId) {
     res.json({ loggedIn: true, username: req.session.username });
   } else {
     res.json({ loggedIn: false });
   }
-}); */
+});
 
 
 app.get("/", (req, res) => {
   if (req.session.userId) {
-      res.sendFile(path.join(__dirname, "homepage", "../homepage/index.html"));
-      } else {
-    res.redirect("../AccountCreateLogin/accountlogin.html");
+    res.redirect("../homepage/index.html");
+    res.sendFile(path.join(__dirname, "homepage", "../homepage/index.html"));
+  } else {
+    res.redirect("../homepage/index.html");
   }
 });
 
@@ -69,7 +68,7 @@ app.get("/", (req, res) => {
   stmt.run(username, hashedPassword, function (err) {
     if (err) {
       console.error("DB error:", err.message);
-      return res.json({ success: false, message: "Username already taken or DB error" });
+      return res.json({ success: false, message: "Username already taken." });
     }
 
     console.log("New user inserted with ID:", this.lastID);
@@ -102,5 +101,10 @@ app.get("/logout", (req, res) => {
     });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
+app.listen(3000, () => console.log(`Server running at http://localhost:${3000}`));
+
+
+
+
+
+
