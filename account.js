@@ -34,13 +34,13 @@ db.run(`
 `);
 
 // is this user logged in and whats their username
-app.get("/session", (req, res) => {
+/* app.get("/session", (req, res) => {
   if (req.session.userId) {
     res.json({ loggedIn: true, username: req.session.username });
   } else {
     res.json({ loggedIn: false });
   }
-});
+}); */
 
 
 app.get("/", (req, res) => {
