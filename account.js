@@ -33,16 +33,23 @@ db.run(`
   )
 `);
 
+// is this user logged in and whats their username
+app.get("/session", (req, res) => {
+  if (req.session.userId) {
+    res.json({ loggedIn: true, username: req.session.username });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
 
 app.get("/", (req, res) => {
-    if (req.session.userId) {
-        res.sendFile(path.join(__dirname, "homepage", "../homepage/index.html"));
-        } else {
-      res.redirect("../AccountCreateLogin/accountlogin.html");
-    }
-  });
-
-
+  if (req.session.userId) {
+      res.sendFile(path.join(__dirname, "homepage", "../homepage/index.html"));
+      } else {
+    res.redirect("../AccountCreateLogin/accountlogin.html");
+  }
+});
 
   
 
