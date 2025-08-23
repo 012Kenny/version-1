@@ -8,18 +8,28 @@
 </head>
 <body>
   <script src = '../NavigationScroll.js'></script>
+  <script src = '../accountmenu.js'></script>
 
   <!---------------------------- Navigation Bar ---------------------------->
   <header id="navbar">
     <a href = "../homepage/index.html"><img src="../images/navigation/logo.png" alt="Site Logo" class="logo" /></a>
     <nav class = 'navigation-bar'>
-      <a href="../Community/community.html">Community</a>
+      <a href="#">Community</a>
       <a href="../Culture/culture.html">Culture</a>
       <a href="../Resources/resources.html">Resources</a>
     </nav>
-    <a href="../AccountCreateLogin/accountcreate.html">
-        <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon">
-    </a>
+
+    <div class = 'account-container'>
+      <img src="../images/navigation/account.png" alt="Account Icon" class="account-icon" id = 'account-icon'>
+      <div class = 'account-dropdown' id = 'account-dropdown'>
+        <div id = 'account-username'>Guest</div>
+
+        <button id = 'signup-btn'>Sign up</button>
+        <button id = 'login-btn'>Login</button>
+        <button id = 'logout-btn' style="display:none;">Log out</button>
+        <button id = 'language-btn'>Language: English</button>
+      </div>
+    </div>
   </header>
    <!---------------------------- ---------------------------- ---------------------------->
 

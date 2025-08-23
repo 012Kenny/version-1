@@ -56,9 +56,51 @@ body {
 .account-icon {
   width: 35px;
   height: 35px;
-  border-radius: 50%;
+  cursor: pointer;
+}
+/* --- drop down menu --- */
+
+.account-dropdown {
+  position: relative;
+  margin: 1rem;
 }
 
+
+.account-dropdown {
+  position: absolute;
+  display: flex;
+  align-items: right;
+  flex-direction: column;
+  justify-content: center;
+  right: 0;
+  background-color: rgba(42, 42, 42, 0.8);
+  padding: 1rem;
+  margin-top: 1.5rem;
+  min-width: 10rem;
+  color: white;
+  visibility: hidden;
+}
+
+#account-username {
+  font-size: 1.5rem;
+  text-decoration: underline 0.05rem;
+  text-underline-offset: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.account-dropdown button {
+  text-align: left;
+  color: white;
+  background: none;
+  border: none;
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.account-dropdown button:hover {
+  text-decoration: underline;
+}
 /* ------------------------------------- */
 
 
@@ -107,7 +149,7 @@ input {
   width: 250px;
 }
 
-button {
+form button {
   padding: 12px;
   font-size: 14px;
   letter-spacing: 2px;
