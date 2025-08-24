@@ -130,7 +130,7 @@ app.get("/logout", (req, res) => {
 });
 
 // store chat history in a table
-let chatHistory = [];
+/* let chatHistory = [];
 let activeUsers = new Set();
 
 
@@ -168,7 +168,7 @@ socket.on("disconnect", () => {
     activeUsers.delete(username);
     io.emit("system", `${username},`)
   }
-})
+}) */
 
 
 

@@ -18,6 +18,10 @@
   "homepage": "https://github.com/012Kenny/version-1#readme",
   "keywords": [],
   "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3",
+    "sqlite3": "^5.1.6",
     "socket.io": "^4.8.1"
   }
 }
