@@ -137,3 +137,19 @@ app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`)
 const http = require("http").createServer(app)
 const io = require("socket.io")(http);
 
+
+// store chat history in a table
+let chatHistory = [];
+let activeUsers = new Set();
+
+io.on("connection", (socket) => {
+  let username = null;
+
+  socket.on("join", (name) => {
+    username = name || "Guest"
+    activeUsers.add(username);
+    
+    io.emit("system", `${username} has joined the chatroom`);
+    socket.emit("history", chatHistory);
+  })
+});

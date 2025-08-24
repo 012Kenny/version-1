@@ -1,10 +1,10 @@
 {
   "name": "desktop",
   "version": "1.0.0",
-  "description": "server side account",
-  "main": "account.js",
+  "description": "server side account/chat",
+  "main": "server.js",
   "scripts": {
-    "start": "node account.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
