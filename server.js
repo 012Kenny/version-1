@@ -17,6 +17,7 @@ const session = require("express-session"); // manages user session via signed c
 const bcrypt = require("bcryptjs"); // hash password
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path"); 
+const { Server } = require(socket.io); // socket.io
 //** ------------------------ **//
 
 
@@ -26,8 +27,12 @@ const SESSION_SECRET = process.env.SESSION_SECRET || "random128424"
 const STATIC_DIR = process.env.STATIC_DIR || path.join(__dirname);
 const HOMEPAGE_PATH = process.env.HOMEPAGE_PATH || path.join(__dirname, "homepage", "index.html");
 //** ------------------------ **//
-const app = express(); // create express app
+
+const app = express(); // create express 
+const server = http.createServer(app) // wrap app in http server
 const db = new sqlite3.Database("./users.db"); // open/create data file user.db
+const io = new Server(server) // attach socket.io
+
 
 
 //** ------------------------ **//
@@ -133,10 +138,6 @@ app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`)
 
 
 
-//** ------- SOCKET.IO ------- **//
-const http = require("http").createServer(app)
-const io = require("socket.io")(http);
-
 
 // store chat history in a table
 let chatHistory = [];
@@ -169,6 +170,17 @@ socket.on("leave", () => {
     activeUsers.delete(username)
     io.emit("system", `${username} has left the chat.`)
   }
-})
+});
+
+
+socket.on("disconnect", () => {
+  if (username) {
+    activeUsers.delete(username);
+    io.emit("system", `${username} has left the chat.`);
+    if (activeUsers.size === 0) { // if no users in the chat, reset
+      chatHistory = [];
+    }
+  }
+});
 
 
