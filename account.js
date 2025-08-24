@@ -1,15 +1,41 @@
-const express = require("express");
-const session = require("express-session");
-const bcrypt = require("bcryptjs");
+/** 
+* server sided authetnication server
+* for the account login/sign up logic and saving
+*
+* Run node account.js
+*
+*
+*
+* Passwords hashed with bcrypt to mitigate data leaks.
+* Store user id + username
+*/
+
+
+//** ------- IMPORTS ------- **//
+const express = require("express"); // http server and routing
+const session = require("express-session"); // manages user session via signed cookie
+const bcrypt = require("bcryptjs"); // hash password
 const sqlite3 = require("sqlite3").verbose();
-const path = require("path");
+const path = require("path"); 
+//** ------------------------ **//
 
-const app = express();
-const db = new sqlite3.Database("./users.db");
+require("dotenv").config() // Configure secrets without hardcoding
+
+//** ------- CONFIGURATION (easy to change) ------- **//
+const PORT = process.env.PORT || 3000;
+const SESSION_SECRET = process.env.SESSION_SECRET || "random128424" 
+const STATIC_DIR = process.env.STATIC_DIR || path.join(__dirname);
+const HOMEPAGE_PATH = process.env.HOMEPAGE_PATH || path.join(__dirname, "homepage", "index.html");
+//** ------------------------ **//
+const app = express(); // create express app
+const db = new sqlite3.Database("./users.db"); // open/create data file user.db
 
 
+//** ------------------------ **//
+// read json and form-encoded bodies into req.body
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+//** ------------------------ **//
 
 app.use(
     session({
