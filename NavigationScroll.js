@@ -1,11 +1,10 @@
  
 const scriptTag = document.currentScript
-
 const thresholdData = parseFloat(scriptTag.getAttribute("data-threshold")) // this gets the threhold vairable so its configurable from the html
 
 
 
-// ------ Scroll nav ------ //
+// ------ Scroll nav before ------ //
 /* window.addEventListener('scroll', function () {
 const navbar = document.getElementById('navbar');
     if (window.scrollY > window.innerHeight * thresholdData) { // goes below a certain height, + lower - higher

@@ -117,7 +117,7 @@ body {
   flex-direction: column;
 }
 
-.chatroom {
+.chatroom-join {
   margin: 0 auto;
   text-align: center;
   padding: 40px 24px 80px;
@@ -281,4 +281,14 @@ body {
 #chat-input {
   flex: 1;
   padding: 0.5rem;
+}
+
+.msg-box {
+  display: inline-block;
+  background: #e0baba;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  margin-top: 0.25rem;
+  color: black;
+  max-width: 80%;
 }
