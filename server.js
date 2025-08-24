@@ -142,6 +142,8 @@ const io = require("socket.io")(http);
 let chatHistory = [];
 let activeUsers = new Set();
 
+
+// ---- user joining chat room
 io.on("connection", (socket) => {
   let username = null;
 
@@ -149,7 +151,24 @@ io.on("connection", (socket) => {
     username = name || "Guest"
     activeUsers.add(username);
     
-    io.emit("system", `${username} has joined the chatroom`);
+    io.emit("system", `${username} has joined the chat.`);
     socket.emit("history", chatHistory);
   })
 });
+
+
+socket.on("message", (msg) => {
+  if (!username) return;
+  const messageObj = {username, text:msg};
+  chatHistory.push(messageObj);
+  io.emit('message', messageObj);
+});
+
+socket.on("leave", () => {
+  if (username) {
+    activeUsers.delete(username)
+    io.emit("system", `${username} has left the chat.`)
+  }
+})
+
+
