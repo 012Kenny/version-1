@@ -121,7 +121,13 @@ body {
   margin: 0 auto;
   text-align: center;
   padding: 40px 24px 80px;
-  display: none;
+}
+
+.join-btn {
+
+  margin-left: 2.2rem;
+  letter-spacing: 0.8px;
+  font-size: 1.4rem;
 }
 
 .page-title {
@@ -159,12 +165,6 @@ body {
   transform: translateY(-0.2rem);
   background: #8c4444;
   box-shadow: 0 10px 24px rgba(0,0,0,0.45)
-}
-
-.label {
-  margin-left: 2.2rem;
-  letter-spacing: 0.8px;
-  font-size: 1.4rem;
 }
 
 .footer-text {
@@ -207,6 +207,7 @@ body {
   width: 70%;
   height: 60%;
   max-width: 60rem;
+  display: none;
 }
 
 .chat-title {

@@ -37,6 +37,7 @@ const io = new Server(server); // attach socket.io
 // read json and form-encoded bodies into req.body
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+app.use(express.static("Community")); // serve front end files
 //** ------------------------ **//
 
 app.use(
@@ -129,48 +130,76 @@ app.get("/logout", (req, res) => {
     });
 });
 
-// store chat history in a table
-/* let chatHistory = [];
-let activeUsers = new Set();
 
 
-// ---- user joining chat room
+
+//** ------- Variables - Chat ------- **//
+let users = {}; // Store users: socket.id (username)
+let chatHistory = []; // Store chat history: {user: "name", msg "message"}
+
+
+
+//** ------- Chat room functionaility using socket.io ------- **//
 io.on("connection", (socket) => {
-  let username = null;
+  console.log("user connected")
 
-  socket.on("join", (name) => {
-    username = name || "Guest"
-    activeUsers.add(username);
+  
+  //** ------- send chat history to any new users joining the chat ------- **//
+  socket.emit("chat history", chatHistory) 
+  
+  
+  //** ------- Join chat ------- **//
+  socket.on("join", (username) => { // whenever a user joins
+      users[socket.id] = username; // makes new user
+
+      //// -- join message
+      const joinMsg = { user: "System", msg: `${username} has joined the chat` };
+      //// --
+
+      chatHistory.push(joinMsg) // adds join msg to chat history
+
+      io.emit("chat message", joinMsg);
+  });
+  //** ------------------------ **//
+
+  
+  //** ------- Message ------- **//
+  socket.on("chat message", (msg) => { // whenever a user sends msg
+
+    //// --  message
+    const newMsg = {user: users[socket.id], msg};
+    //// --
+
+    //// --
+    chatHistory.push(newMsg); // adds newMsg to chat history
+    io.emit("chat message", newMsg);
+  });
+  //** ------------------------ **//
+
+
+  
+//** ------- Disconnect ------- **//
+  socket.on("disconnect", () => { // whenever a user disconnects from chat
+
+    if (users[socket.id]) {
+      //// -- leave message
+      const leaveMsg = { user: "System", msg: `${users[socket.id]} has left the chat` };
+      //// --
+
+      chatHistory.push(leaveMsg); // adds the leaveMsg to chat history
+      io.emit("chat message", leaveMsg);
+      delete users[socket.id]
+    }
+
     
-    io.emit("system", `${username} has joined the chat.`);
-    socket.emit("history", chatHistory);
-  })
+    //** ------- If there's no one in the chat ------- **//
+    if (Object.keys(users).length === 0) { // checks user table, if none then reset
+      chatHistory = []; // clear chat history
+      io.emit("clear chat"); // // clear chat
+    }
+  });
+  //** ------------------------ **//
 });
-
-
-socket.on("message", (msg) => {
-  if (!username) return;
-  const messageObj = {username, text:msg};
-  chatHistory.push(messageObj);
-  io.emit('message', messageObj);
-});
-
-socket.on("leave", () => {
-  if (username) {
-    activeUsers.delete(username)
-    io.emit("system", `${username} has left the chat.`)
-  }
-})
-
-
-socket.on("disconnect", () => {
-  if (username) {
-    activeUsers.delete(username);
-    io.emit("system", `${username},`)
-  }
-}) */
-
-
 
 
 
