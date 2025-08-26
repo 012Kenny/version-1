@@ -67,7 +67,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             msgDiv.classList.add("system");
             msgDiv.textContent = data.msg;
         } else {
-            msgDiv.innerHTML = `<strong>${data.user}:</strong> ${data.msg}`;
+            const msgBox = document.createElement("div");
+            msgBox.classList.add("msg-box");
+            msgBox.innerHTML = `<strong>${data.user}:</strong> ${data.msg}`;
+
+            //* if its your message, or not*/
+            if (data.user === document.getElementById("account-username").textContent) {
+                msgDiv.classList.add("self"); 
+            } else {
+                msgDiv.classList.add("other");
+            }
+
+            msgDiv.appendChild(msgBox);
         }
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -93,6 +104,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     socket.on("clear chat", () => {
         chatMessages.innerHTML = "";
     });
+
+    //** ------- listens for the join error (if user is already in chatroom) ------- **//
+    socket.on("join-error", (msg) => {
+        alert(msg);
+        chatroomJoinSection.style.display = 'block';
+        actualChatroom.style.display = 'none';
+    })
 
 });
 

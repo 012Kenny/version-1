@@ -150,6 +150,16 @@ io.on("connection", (socket) => {
   
   //** ------- Join chat ------- **//
   socket.on("join", (username) => { // whenever a user joins
+      if (users[socket.id]) return; // already joined
+
+      // checks if username already exists in the chat
+      const nameTaken = Object.values(users).includes(username);
+      if (nameTaken) {
+        socket.emit("join-error", "You're already in this chatroom.");
+        return;
+      }
+
+
       users[socket.id] = username; // makes new user
 
       //// -- join message

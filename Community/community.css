@@ -256,18 +256,38 @@ body {
   overflow-y: auto;
   margin: 1rem 0;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   background: rgb(58, 58, 58);;
+  height: 20rem;
+  max-height: 20rem;
 }
+
+/*--- messages --- */
+
 
 .message {
   margin-bottom: 1rem;
+  color: white;
 }
+
+.message.self {
+  justify-content: flex-end;
+  text-align: left;
+}
+
+.message.other {
+  justify-content: flex-start;
+  text-align: right;
+}
+
 
 .message strong {
   display: block;
   font-size: 1rem;
   color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
+  font-weight: 100;
 }
 
 .system {
@@ -288,10 +308,9 @@ body {
 
 .msg-box {
   display: inline-block;
-  background: #e0baba;
+  background: #717171;
   padding: 0.5rem 1rem;
-  border-radius: 12px;
   margin-top: 0.25rem;
-  color: black;
+  color: white;
   max-width: 80%;
 }
