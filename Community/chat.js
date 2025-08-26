@@ -49,5 +49,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             chatInput.value = "";
         }
     });
+
+    //** ------- render messages ------- **//
+
+    function renderMessage(data) { // render msg function
+
+        // makes message //
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("message");
+        // ------------ //
+
+        
+        if (data.user === "System") {
+            msgDiv.classList.add("system");
+            msgDiv.textContent = data.msg;
+        } else {
+            msgDiv.innerHTML = `<strong>${data.user}:</strong> ${data.msg}`;
+        }
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 });
 
