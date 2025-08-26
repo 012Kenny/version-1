@@ -69,5 +69,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
+
+
+    //** ------- SOCKET ------- **//
+
+
+
+    //** ------- Recieve chat history ------- **//
+    socket.on("chat history", (history) => {
+        chatMessages.innerHTML = "";
+        history.forEach((msg) => renderMessage(msg));
+    });
+
+    //** ------- Recieve new messages ------- **//
+    socket.on("chat message", (data) => {
+        renderMessage(data);
+    });
+
+    //** ------- Clear chat when everyone leaves ------- **//
+    socket.on("clear chat", () => {
+        chatMessages.innerHTML = "";
+    });
+
 });
 
