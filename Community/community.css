@@ -147,7 +147,7 @@ body {
   max-width: 50rem;
 }
 
-.room {
+.join-room {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -158,10 +158,12 @@ body {
   position: relative;
   box-shadow: 0 6px 18px rgba(0,0,0,0.35);
   transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  border: none;
+  cursor: pointer;
 }
 
 
-.room:hover {
+.join-room:hover {
   transform: translateY(-0.2rem);
   background: #8c4444;
   box-shadow: 0 10px 24px rgba(0,0,0,0.45)
@@ -265,7 +267,7 @@ body {
 .message strong {
   display: block;
   font-size: 1rem;
-  color: #632d2b;
+  color: #ffffff;
 }
 
 .system {

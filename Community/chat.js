@@ -1,8 +1,11 @@
-const socket = io();
+
 
 document.addEventListener("DOMContentLoaded", async () => {
+    console.log("Chat.js loaded.")
+
     //** ------- variables ------- **//
-    const joinBtn = document.querySelector(".join-btn");
+    const socket = io();
+    const joinBtn = document.querySelector(".join-room");
     const chatroomJoinSection = document.querySelector(".chatroom-join");
     const actualChatroom = document.querySelector(".actual-chatroom");
 
@@ -11,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById("chat-input");
 
-    let username = document.getElementById("account-username").textContent;
 
 
 
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
 
     joinBtn.addEventListener('click', (e) => {
+        let username = document.getElementById("account-username").textContent;
         console.log("joined chat")
         e.preventDefault();
         socket.emit("join", username);
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         socket.disconnect();
         socket.connect();
 
-        chatroomJoinSection.style.display - 'block';
+        chatroomJoinSection.style.display = 'block';
         actualChatroom.style.display = 'none';
     });
 
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     chatForm.addEventListener('submit', (e) => {
         console.log("submitted message")
         e.preventDefault();
-        const msg = chatInput.ariaValueMax.trim();
+        const msg = chatInput.value.trim();
 
         if (msg) {
             socket.emit("chat message", msg);
