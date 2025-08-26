@@ -23,7 +23,7 @@ const { Server } = require('socket.io')
 
 
 //** ------- CONFIGURATION (easy to change) ------- **//
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || "random128424" 
 const STATIC_DIR = process.env.STATIC_DIR || path.join(__dirname);
 const HOMEPAGE_PATH = process.env.HOMEPAGE_PATH || path.join(__dirname, "homepage", "index.html");
