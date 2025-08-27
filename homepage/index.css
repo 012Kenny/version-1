@@ -216,44 +216,15 @@ body {
 
 
 /* ------------------------------------- */
-/*--- newsletter section --- */
-.newsletter-section {
+/*--- footer section --- */
+.footer {
   background-color: #632d2b;
   color: white;
   text-align: center;
   padding: 80px 20px;
 }
 
-.newsletter-section h2 {
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-}
-
-.newsletter-section form {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.newsletter-section input[type="email"] {
-  padding: 0.6rem;
-  width: 15.625rem;
-  border: none;
-  outline: none;
-}
-
-.newsletter-section button {
-  padding: 0.6rem 1rem;
-  background-color: #1c1c1c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-footer {
+.footer-text {
   margin-top: 2rem;
   font-size: 0.85rem;
 }

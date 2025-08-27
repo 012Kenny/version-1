@@ -15,19 +15,23 @@
 const express = require("express"); // http server and routing
 const session = require("express-session"); // manages user session via signed cookie
 const bcrypt = require("bcryptjs"); // hash password
-const sqlite3 = require("sqlite3").verbose();
-const path = require("path"); 
+const sqlite3 = require("sqlite3").verbose(); // database for storing users
+
+// file path fixing and work
+const path = require("path");  
 const http = require("http")
-const { Server } = require('socket.io')
+const { Server } = require('socket.io') // real-time chat
 //** ------------------------ **//
 
 
 //** ------- CONFIGURATION (easy to change) ------- **//
-const PORT = 3000;
+const PORT = 3000; // port server will run on
 const SESSION_SECRET = process.env.SESSION_SECRET || "random128424" 
-const STATIC_DIR = process.env.STATIC_DIR || path.join(__dirname);
+const STATIC_DIR = process.env.STATIC_DIR || path.join(__dirname); // serve front end
 const HOMEPAGE_PATH = process.env.HOMEPAGE_PATH || path.join(__dirname, "homepage", "index.html");
 //** ------------------------ **//
+
+// SEVER + DATABASE
 const app = express(); // create express app
 const db = new sqlite3.Database("./users.db"); // open/create data file user.db
 const server = http.createServer(app); // wrap app in http server
@@ -35,14 +39,15 @@ const io = new Server(server); // attach socket.io
 
 //** ------------------------ **//
 // read json and form-encoded bodies into req.body
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true})); // read form data
+app.use(express.json()); // read json
 app.use(express.static("Community")); // serve front end files
 //** ------------------------ **//
 
+// SESSION CONFIG
 app.use(
     session({
-        secret: "key19842",
+        secret: SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {maxAge: 1000 * 60 * 60 * 24 * 7} // 7 days
@@ -52,6 +57,7 @@ app.use(
 app.use(express.static(path.join(__dirname)));
 
 
+//** ------- DATABASE TABLE SET UP ------- **//
 db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,8 +65,13 @@ db.run(`
     password TEXT
   )
 `);
+//** ------------------------ **//
 
-// is this user logged in and whats their username
+
+
+//** ----------- ROUTES ------------- **//
+
+// ---- Check session (if logged in or not)
 app.get("/session", (req, res) => {
   if (req.session.userId) {
     res.json({ loggedIn: true, username: req.session.username });
@@ -70,20 +81,14 @@ app.get("/session", (req, res) => {
 });
 
 
+// ---- Homepage route
 app.get("/", (req, res) => {
-  if (req.session.userId) {
-    res.redirect("../homepage/index.html");
-    res.sendFile(path.join(__dirname, "homepage", "../homepage/index.html"));
-  } else {
-    res.redirect("../homepage/index.html");
-  }
+  res.redirect("../homepage/index.html");
 });
 
   
-
-  // Sign up
-
- app.post("/signup", (req, res) => {
+// ---- Signup route (async hashing)
+app.post("/signup", (req, res) => {
   const { username, password } = req.body;
   console.log("Signup attempt:", username, password);
 
@@ -91,7 +96,7 @@ app.get("/", (req, res) => {
     return res.json({success: false, message: "Missing username or password"});
   }
 
-  const hashedPassword = bcrypt.hashSync(password, 10);
+  const hashedPassword = bcrypt.hashSync(password, 10); // async hash
   const stmt = db.prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 
   stmt.run(username, hashedPassword, function (err) {
@@ -108,6 +113,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// ---- Login route
 app.post("/login", (req, res) => {
     const {username, password} = req.body;
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
@@ -124,6 +130,7 @@ app.post("/login", (req, res) => {
 
   
 
+// ---- Logout route
 app.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.redirect("/AccountCreateLogin/accountlogin.html");
@@ -132,14 +139,35 @@ app.get("/logout", (req, res) => {
 
 
 
+/**  below is the chat system
+* 
+* 
+*
+*
+*
+*
+*
+* 
+* For chat functionaility
+*/
+
 
 //** ------- Variables - Chat ------- **//
 let users = {}; // Store users: socket.id (username)
 let chatHistory = []; // Store chat history: {user: "name", msg "message"}
+let usernamesSet = new Set() // track unique usernames
+// ---------------------------- //
 
-
+// Function to add/show messages
+function addChatMessage(msgObj) {
+  chatHistory.push(msgObj) // adds msg to chat history
+  io.emit("chat message", msgObj)
+}
+//
 
 //** ------- Chat room functionaility using socket.io ------- **//
+// -- SOCKET.IO EVENTS
+
 io.on("connection", (socket) => {
   console.log("user connected")
 
@@ -153,8 +181,7 @@ io.on("connection", (socket) => {
       if (users[socket.id]) return; // already joined
 
       // checks if username already exists in the chat
-      const nameTaken = Object.values(users).includes(username);
-      if (nameTaken) {
+      if (usernamesSet.has(username)) {
         socket.emit("join-error", "You're already in this chatroom.");
         return;
       }
@@ -163,12 +190,8 @@ io.on("connection", (socket) => {
       users[socket.id] = username; // makes new user
 
       //// -- join message
-      const joinMsg = { user: "System", msg: `${username} has joined the chat` };
+      addChatMessage({ user: "System", msg: `${username} has joined the chat` });
       //// --
-
-      chatHistory.push(joinMsg) // adds join msg to chat history
-
-      io.emit("chat message", joinMsg);
   });
   //** ------------------------ **//
 
