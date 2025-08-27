@@ -183,11 +183,12 @@ io.on("connection", (socket) => {
       // checks if username already exists in the chat
       if (usernamesSet.has(username)) {
         socket.emit("join-error", "You're already in this chatroom.");
-        return;
+        return; // if already in, send error and return
       }
 
 
       users[socket.id] = username; // makes new user
+      usernamesSet.add(username)
 
       //// -- join message
       addChatMessage({ user: "System", msg: `${username} has joined the chat` });
@@ -198,14 +199,9 @@ io.on("connection", (socket) => {
   
   //** ------- Message ------- **//
   socket.on("chat message", (msg) => { // whenever a user sends msg
+    if (!users[socket.id]) return; // ignore if user not joined
+    addChatMessage({ user: users[socket.id], msg});
 
-    //// --  message
-    const newMsg = {user: users[socket.id], msg};
-    //// --
-
-    //// --
-    chatHistory.push(newMsg); // adds newMsg to chat history
-    io.emit("chat message", newMsg);
   });
   //** ------------------------ **//
 
@@ -216,12 +212,10 @@ io.on("connection", (socket) => {
 
     if (users[socket.id]) {
       //// -- leave message
-      const leaveMsg = { user: "System", msg: `${users[socket.id]} has left the chat` };
+      addChatMessage({ user: "System", msg: `${users[socket.id]} has left the chat` });
       //// --
-
-      chatHistory.push(leaveMsg); // adds the leaveMsg to chat history
-      io.emit("chat message", leaveMsg);
-      delete users[socket.id]
+      usernamesSet.delete(users[socket.id]);
+      delete users[socket.id];
     }
 
     
@@ -236,4 +230,5 @@ io.on("connection", (socket) => {
 
 
 
+// ----- Start server ----- //
 server.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
