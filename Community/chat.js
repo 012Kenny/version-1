@@ -1,10 +1,21 @@
+/** 
+* Client-side chat system
+* recieve info from server and update it in client for chat
+*
+* 
+*
+*
+*
+* 
+* 
+*/
 
 
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("Chat.js loaded.")
 
     //** ------- variables ------- **//
-    const socket = io();
+    const socket = io(); // socket.io server
     const joinBtn = document.querySelector(".join-room");
     const chatroomJoinSection = document.querySelector(".chatroom-join");
     const actualChatroom = document.querySelector(".actual-chatroom");
@@ -18,11 +29,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     //** ------- join chat ------- **//
-    
-
     joinBtn.addEventListener('click', (e) => {
         let username = document.getElementById("account-username").textContent;
         console.log("joined chat")
+
+        // shows chatroom
         e.preventDefault();
         socket.emit("join", username);
         chatroomJoinSection.style.display = 'none';
@@ -34,9 +45,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     //** ------- leave chat ------- **//
     leaveChatBtn.addEventListener("click", () => {
         console.log("left chat")
+
+        // disconnect and reconnects socket, shows ui
         socket.disconnect();
         socket.connect();
-
         chatroomJoinSection.style.display = 'block';
         actualChatroom.style.display = 'none';
     });
@@ -47,6 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         e.preventDefault();
         const msg = chatInput.value.trim();
 
+        // send message to server if msg is valid and clear chat type box
         if (msg) {
             socket.emit("chat message", msg);
             chatInput.value = "";
@@ -54,7 +67,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     //** ------- render messages ------- **//
-
     function renderMessage(data) { // render msg function
 
         // makes message //
@@ -63,10 +75,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         // ------------ //
 
         
-        if (data.user === "System") {
+        if (data.user === "System") { // System messages Join/Leave
             msgDiv.classList.add("system");
             msgDiv.textContent = data.msg;
-        } else {
+        } else { // normal user messages
             const msgBox = document.createElement("div");
             msgBox.classList.add("msg-box");
             msgBox.innerHTML = `<strong>${data.user}:</strong> ${data.msg}`;
@@ -80,8 +92,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             msgDiv.appendChild(msgBox);
         }
-        chatMessages.appendChild(msgDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatMessages.appendChild(msgDiv); // add to chat window
+        chatMessages.scrollTop = chatMessages.scrollHeight; // scroll to bottom
     }
 
 
@@ -90,13 +102,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     //** ------- Recieve chat history ------- **//
-    socket.on("chat history", (history) => {
+    socket.on("chat history", (history) => { // show old msgs
         chatMessages.innerHTML = "";
         history.forEach((msg) => renderMessage(msg));
     });
 
     //** ------- Recieve new messages ------- **//
-    socket.on("chat message", (data) => {
+    socket.on("chat message", (data) => { // new msgs
         renderMessage(data);
     });
 
@@ -106,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     //** ------- listens for the join error (if user is already in chatroom) ------- **//
-    socket.on("join-error", (msg) => {
+    socket.on("join-error", (msg) => { // show error and hide chatroom and show join btn
         alert(msg);
         chatroomJoinSection.style.display = 'block';
         actualChatroom.style.display = 'none';
