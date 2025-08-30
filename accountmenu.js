@@ -86,4 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.location.reload(); // refresh page after logout
     window.location.href =  "../homepage/index.html"; 
   });
+
+
+
 });

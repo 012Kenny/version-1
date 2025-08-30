@@ -228,3 +228,53 @@ body {
   margin-top: 2rem;
   font-size: 0.85rem;
 }
+
+
+
+/* ------------------------------------- */
+/* Mobile */
+
+@media (max-width: 620px) {
+  .main-text h1 {
+    text-align: center;
+  }
+
+  .main-section {
+    justify-content: center;
+  }
+
+  .main-text {
+    text-align: center;
+  }
+
+  #navbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    z-index: 5;
+  }
+
+
+  .navigation-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 5;
+    background-color: rgba(42, 42, 42, 0.6);
+  }
+
+  .navigation-bar a {
+    flex: 1;
+    text-align: center;
+  }
+}

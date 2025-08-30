@@ -92,21 +92,26 @@ app.post("/signup", (req, res) => {
   const { username, password } = req.body;
   console.log("Signup attempt:", username, password);
 
+  // password/username is missing
   if (!username || !password) {
     return res.json({success: false, message: "Missing username or password"});
   }
 
+  // encrypts the password
   const hashedPassword = bcrypt.hashSync(password, 10); // async hash
   const stmt = db.prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 
   stmt.run(username, hashedPassword, function (err) {
+
+    // username is taken 
     if (err) {
       console.error("DB error:", err.message);
       return res.json({ success: false, message: "Username already taken." });
     }
 
-    console.log("New user inserted with ID:", this.lastID);
 
+    // Create new user information, if new account is made
+    console.log("New user inserted with ID:", this.lastID);
     req.session.userId = this.lastID;
     req.session.username = username;
     res.json({ success: true });
@@ -115,7 +120,10 @@ app.post("/signup", (req, res) => {
 
 // ---- Login route
 app.post("/login", (req, res) => {
+
+
     const {username, password} = req.body;
+    // if username/password is invalid. (checks database)
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
         if (!user) return res.json({success: false, message: "Invalid username or password"}); 
         const validPass = bcrypt.compareSync(password, user.password);
